@@ -1,7 +1,7 @@
 # 必要なモジュールのインポート
 import torch
 from animal import transform, Net # animal.py から前処理とネットワークの定義を読み込み
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, jsonify
 import io
 from PIL import Image
 import base64
@@ -78,6 +78,13 @@ def index():
     except Exception as e:
         app.logger.error(f"Exception occurred: {e}")
         return "An error occurred", 500
+
+def handle_post():
+    try:
+        data = request.json
+        return jsonify(data), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 # アプリケーションの実行の定義
 if __name__ == '__main__':
