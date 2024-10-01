@@ -10,4 +10,4 @@ pillow==10.3.0
 --find-links https://download.pytorch.org/whl/torch_stable.html
 torch==2.3.0
 pytorch-lightning==2.4.0
-torchvision==0.18.1a0
+torchvision==0.18.1
