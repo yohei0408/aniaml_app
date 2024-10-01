@@ -38,7 +38,7 @@ def allwed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # URL にアクセスがあった場合の挙動の設定
-@app.route('/', methods = ['GET', 'POST'])
+@app.route('/', methods = ['GET', 'POST', 'HEAD'])
 def predicts():
     # リクエストがポストかどうかの判別
     if request.method == 'POST':
@@ -70,6 +70,14 @@ def predicts():
     elif request.method == 'GET':
         return render_template('index.html')
 
+def index():
+    try:
+        if request.method == 'HEAD':
+            return '', 200  # レスポンスボディなし
+        return "Hello, World!"
+    except Exception as e:
+        app.logger.error(f"Exception occurred: {e}")
+        return "An error occurred", 500
 
 # アプリケーションの実行の定義
 if __name__ == '__main__':
